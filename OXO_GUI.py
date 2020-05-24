@@ -24,8 +24,6 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         icon = QIcon()
         icon.addPixmap(QPixmap("game_icon.png"))
         self.setWindowIcon(icon)  # set window icon
-        
-
 
         # create header 
         self.header = QLabel("TenElevenGames OXO")
@@ -57,11 +55,10 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         
         # insert server label and buttons
         self.horizontal = QGridLayout()
-        self.horizontal.addWidget(self.toolBar,0,1,1,1)
-        self.horizontal.addWidget(self.header,1,1,1,1)
-        self.horizontal.addWidget(self.server_label,2,0)
-        self.horizontal.addWidget(self.server_lineEdit,2,1)
-        self.horizontal.addWidget(self.connect_btn,2,2)
+        self.horizontal.addWidget(self.header,0,1,1,1)
+        self.horizontal.addWidget(self.server_label,1,0)
+        self.horizontal.addWidget(self.server_lineEdit,1,1)
+        self.horizontal.addWidget(self.connect_btn,1,2)
         self.horizontal.setAlignment(Qt.AlignTop)  # align the grid layout at the top
         """ Horizontal QWidget  """
         self.horizontal_widget = QWidget()
@@ -142,7 +139,22 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
             self.row += 1
         """ Board game QWidget """
         self.board_game_widget = QWidget()
-        self.board_game_widget.setLayout(self.board_game)  #
+        self.board_game_widget.setLayout(self.board_game)  
+        
+        # create new_game and exit button
+        self.new_game = QPushButton("new game")
+        self.new_game.setFixedSize(90,20)
+        self.new_game.setFont(QFont("Monospace",13,5))
+        self.exit = QPushButton("exit")
+        self.exit.setFixedSize(90,20)
+        self.exit.setFont(QFont("Monospace",13,5))
+        
+        self.grid_buttons = QGridLayout()
+        self.grid_buttons.addWidget(self.new_game,0,3)
+        self.grid_buttons.addWidget(self.exit,0,4)
+        """ grid_buttons QWidget """
+        self.grid_buttons_widget = QWidget()
+        self.grid_buttons_widget.setLayout(self.grid_buttons)
         
         # HBox for the board game and text messages
         self.board_message = QHBoxLayout()
@@ -158,6 +170,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.main_layout.addWidget(self.horizontal_widget)
         self.main_layout.addWidget(self.header_hbox_widget)
         self.main_layout.addWidget(self.board_message_widget)
+        self.main_layout.addWidget(self.grid_buttons_widget)
         self.main_layout_widget = QWidget()
         self.main_layout_widget.setLayout(self.main_layout)
         
