@@ -24,6 +24,15 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         icon = QIcon()
         icon.addPixmap(QPixmap("game_icon.png"))
         self.setWindowIcon(icon)  # set window icon
+        
+        # set a tool bar
+        self.toolBar = QToolBar()
+        self.toolBar.setMovable(False)
+        self.toolBar.setFloatable(False)
+        self.new_game = QAction(QIcon("New.png"),"new game",self)
+        self.toolBar.addAction(self.new_game)
+        self.exit = QAction(QIcon("Exit.png"),"exit",self)
+        self.toolBar.addAction(self.exit)
 
         # create header 
         self.header = QLabel("TenElevenGames OXO")
@@ -55,15 +64,17 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         
         # insert server label and buttons
         self.horizontal = QGridLayout()
-        self.horizontal.addWidget(self.header,0,1,1,1)
-        self.horizontal.addWidget(self.server_label,1,0)
-        self.horizontal.addWidget(self.server_lineEdit,1,1)
-        self.horizontal.addWidget(self.connect_btn,1,2)
+        self.horizontal.addWidget(self.toolBar,0,1,1,1)
+        self.horizontal.addWidget(self.header,1,1,1,1)
+        self.horizontal.addWidget(self.server_label,2,0)
+        self.horizontal.addWidget(self.server_lineEdit,2,1)
+        self.horizontal.addWidget(self.connect_btn,2,2)
         self.horizontal.setAlignment(Qt.AlignTop)  # align the grid layout at the top
         """ Horizontal QWidget  """
         self.horizontal_widget = QWidget()
         self.horizontal_widget.setLayout(self.horizontal)  
         
+                
         # set up widget for Text message 
         self.server_messages = QTextEdit("valid move")  # the text set on this textedit is for display and will be removed moving on to the next assignment
         self.server_messages.setFont(QFont("Arial",13,5))
@@ -121,7 +132,6 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.board_game.setContentsMargins(0,0,0,0)
         self.board_game.setSpacing(0)
         self.object_name, self.row = 0, 0
-        
         while self.row <= 2:
             for self.column in range(3):
                 self.button = QToolButton()
@@ -139,21 +149,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
             self.row += 1
         """ Board game QWidget """
         self.board_game_widget = QWidget()
-        self.board_game_widget.setLayout(self.board_game)  
-        
-        # create new game and exit button
-        self.new_game = QPushButton("new game")
-        self.new_game.setFixedSize(90,20)
-        self.new_game.setFont(QFont("Monospace",13,5))
-        self.exit_game = QPushButton("exit")
-        self.exit_game.setFixedSize(90,20)        
-        self.exit_game.setFont(QFont("Monospace",13,5))
-        self.grid_buttons = QGridLayout()
-        self.grid_buttons.addWidget(self.new_game,0,3)
-        self.grid_buttons.addWidget(self.exit_game,0,4)
-        """ gird_buttons QWidget """
-        self.grid_buttons_widget = QWidget()
-        self.grid_buttons_widget.setLayout(self.grid_buttons)
+        self.board_game_widget.setLayout(self.board_game)  #
         
         # HBox for the board game and text messages
         self.board_message = QHBoxLayout()
@@ -169,7 +165,6 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.main_layout.addWidget(self.horizontal_widget)
         self.main_layout.addWidget(self.header_hbox_widget)
         self.main_layout.addWidget(self.board_message_widget)
-        self.main_layout.addWidget(self.grid_buttons_widget)
         self.main_layout_widget = QWidget()
         self.main_layout_widget.setLayout(self.main_layout)
         
