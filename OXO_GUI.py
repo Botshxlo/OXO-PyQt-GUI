@@ -25,14 +25,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         icon.addPixmap(QPixmap("game_icon.png"))
         self.setWindowIcon(icon)  # set window icon
         
-        # set a tool bar
-        self.toolBar = QToolBar()
-        self.toolBar.setMovable(False)
-        self.toolBar.setFloatable(False)
-        self.new_game = QAction(QIcon("New.png"),"new game",self)
-        self.toolBar.addAction(self.new_game)
-        self.exit = QAction(QIcon("Exit.png"),"exit",self)
-        self.toolBar.addAction(self.exit)
+
 
         # create header 
         self.header = QLabel("TenElevenGames OXO")
