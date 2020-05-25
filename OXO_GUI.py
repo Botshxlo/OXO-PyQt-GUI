@@ -122,6 +122,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.board_game.setContentsMargins(0,0,0,0)
         self.board_game.setSpacing(0)
         self.object_name, self.row = 0, 0
+        
         while self.row <= 2:
             for self.column in range(3):
                 self.button = QToolButton()
