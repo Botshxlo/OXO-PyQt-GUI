@@ -4,7 +4,7 @@
 
 import sys  
 import os
-import qstylizer.style
+import qstylizer.style  # install qstylzer usgin $ pip install qstlyzer
 from PyQt5.QtWidgets import *  # imports pyqt modules
 from PyQt5.QtCore import *  # imports pyqt modules
 from PyQt5.QtGui import *  # imports pyqt modules
