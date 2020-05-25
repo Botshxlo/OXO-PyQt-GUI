@@ -123,14 +123,15 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.board_game.setSpacing(0)
         self.object_name, self.row = 0, 0
         
-        while self.row <= 2:
-            for self.column in range(3):
+        while self.row <= 2:  # while loop for the rows
+            for self.column in range(3):  # for loop for the columns
                 self.button = QToolButton()
                 self.button.setText("")
                 self.button.setFixedSize(100,100)
                 self.button.setObjectName(str(self.object_name))   
                 self.button.setStyleSheet("background: white")
                 self.button.setIconSize(QSize(100, 100))
+                # set the icons randomly on the game board
                 if self.object_name%2 == 0:
                     self.button.setIcon(self.xIcon)
                 else:
