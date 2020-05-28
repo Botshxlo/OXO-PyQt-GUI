@@ -132,7 +132,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
                 self.button.setObjectName(str(self.object_name))
                 self.button.setStyleSheet("background: white")
                 self.button.setIconSize(QSize(100, 100))
-                # set the icons randomly on the game board
+                # set the icons randomly on the game boar
                 if self.object_name%2 == 0:
                     self.button.setIcon(self.xIcon)
                 else:
@@ -239,24 +239,24 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
             paddingRight="2px"
         )
 
-        self.main_layout_widget.setStyleSheet(css.toString()) # set the style sheet
+        self.main_layout_widget.setStyleSheet(css.toString()) # set the style
 
+        # musk all buttons into one function
         self.allButtons = self.board_game_widget.findChildren(QToolButton)
-
         for self.button in self.allButtons:
             self.button.clicked.connect(self.buttons)
 
-    def buttons(self):
+    def buttons(self):  # buttons function
         self.button_name = self.sender().objectName()
         self.server_messages.append("button "+self.button_name+" clicked")
 
-    def connect_button(self):
+    def connect_button(self):  # connect button
         self.server_messages.append("connect button clicked")
 
-    def exit_button(self):
+    def exit_button(self):  # exit button function
         self.server_messages.append("exit button clicked")
 
-    def newGame(self):
+    def newGame(self):  # new game function
         self.server_messages.append("new game button clicked")
 
 def run_app():
