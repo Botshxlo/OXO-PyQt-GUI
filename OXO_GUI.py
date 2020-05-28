@@ -3,10 +3,10 @@
 # 17/05/2020
 
 import sys
-import qstylizer.style  # install qstylzer usgin $ pip install qstlyzer
 from PyQt5.QtWidgets import *  # imports pyqt modules
 from PyQt5.QtCore import *  # imports pyqt modules
 from PyQt5.QtGui import *  # imports pyqt modules
+from style import styler
 
 class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
     def __init__(self, parent=None):  # parent defines parent widget
@@ -15,9 +15,10 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.setGeometry(390, 90, 610, 500)  # setting window geometries
         self.setPalette(QPalette(QColor("#498f7f")))
 
-        # set the X and O Icons
-        self.oIcon = QIcon("nought.gif")
-        self.xIcon = QIcon("cross.gif")
+        # set the X,O and blank Icon
+        self.oIcon = QIcon("Icons\\nought.gif")
+        self.xIcon = QIcon("Icons\\cross.gif")
+        self.bIcon = QIcon("Icons\\blank.gif")
 
         # set window icon and color
         icon = QIcon()
@@ -180,86 +181,9 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.ui.addWidget(self.main_layout_widget)
         self.setLayout(self.ui)
 
-        # Style the widgets on the main window
-        css = qstylizer.style.StyleSheet()
-
-        # style the Text Edit
-        css.QTextEdit.setValues(
-            borderRadius="7px",
-            marginLeft = "2px",
-            border="2px solid grey",
-        )
-
-        # style the Q labels
-        css.QLabel.setValues(
-            color = "black",
-            marginLeft="6px"
-        )
-
-        # style the QWidget
-        css.QWidget.setValues(
-            backgroundColor="#5ce0c2",
-            borderRadius="10px"
-        )
-
-        # style the connect button
-        css.QPushButton.setValues(
-            border="2px solid gray",
-            paddingLeft="2px",
-            paddingRight="2px"
-        )
-
-        # style the Line Edit
-        css.QLineEdit.setValues(
-            border="2px solid gray",
-            paddingLeft="2px",
-            paddingRight="2px"
-        )
-
-        # Style the tool button
-        css.QToolButton.setValues(
-            border="2px solid grey",
-            marginLeft = "2px",
-            marginRight = "2px",
-            marginBottom = "2px",
-            borderRadius="7px",
-        )
-
-        # change the push button style when pressed
-        css.QPushButton.pressed.setValues(
-            border="3px solid black",
-            padding="5px",
-            paddingLeft="-1px",
-            marginRight="-1px",
-            marginBottom="0px"
-        )
-
-        # change the tool button style when pressed
-        css.QToolButton.pressed.setValues(
-            border="3px solid black",
-            padding="1px",
-            marginLeft="5px",
-            marginRight="5px",
-            marginTop="5px",
-            marginBottom="5px"
-        )
-
-        # change the tool button style when hovered
-        css.QToolButton.hover.setValues(
-            border="3px solid black"
-        )
-
-        # change the push button style when hovered
-        css.QPushButton.hover.setValues(
-            border="2px solid black"
-        )
-
-        # change the server line edit when its hovered
-        css.QLineEdit.hover.setValues(
-            border="2px solid black"
-        )
-
-        self.main_layout_widget.setStyleSheet(css.toString()) # set the stulesheet
+        # set the StyleSheet for the main layout
+        css = styler()
+        self.main_layout_widget.setStyleSheet(css.toString())
 
         # connect buttons
         self.connect_btn.clicked.connect(self.connect_button)
@@ -272,8 +196,8 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
             self.button.clicked.connect(self.buttons)
 
     def buttons(self):  # buttons function
-        self.button_name = self.sender().objectName()
-        self.server_messages.append("button "+self.button_name+" clicked")
+        self.button_number = self.sender().objectName()
+        self.server_messages.append("button "+self.button_number+" clicked")
 
     def connect_button(self):  # connect button
         self.server_messages.append("connect button clicked")
@@ -286,8 +210,8 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
 
 def run_app():
     app = QApplication(sys.argv)  # creates necessary app object
-    window = OXO_GUI()  # Instance of Demo class
-    window.show()   # Show instance of Demo
+    window = OXO_GUI()  # Instance of OXO_GUI class
+    window.show()   # Show instance of OXO_GUI
     sys.exit(app.exec_())  # start executing main app event loop and return value to the exit system
 
 if __name__ == "__main__":
