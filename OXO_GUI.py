@@ -3,7 +3,6 @@
 # 17/05/2020
 
 import sys
-import os
 import qstylizer.style  # install qstylzer usgin $ pip install qstlyzer
 from PyQt5.QtWidgets import *  # imports pyqt modules
 from PyQt5.QtCore import *  # imports pyqt modules
@@ -38,7 +37,6 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.server_lineEdit.setPlaceholderText("enter server")
         self.connect_btn = QPushButton("connect")
         self.connect_btn.setFont(QFont("Monospace",13,5))
-        self.connect_btn.clicked.connect(self.connect_button)
 
         # create game and message headers
         self.the_game_label = QLabel("-----The Game-----")
@@ -122,7 +120,7 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.board_game = QGridLayout()
         self.board_game.setContentsMargins(0,0,0,0)
         self.board_game.setSpacing(0)
-        self.object_name, self.row = 0, 0
+        self.object_name, self.row = 0, 0  # set the row and object name variable
 
         while self.row <= 2:  # while loop for the rows
             for self.column in range(3):  # for loop for the columns
@@ -134,9 +132,9 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
                 self.button.setIconSize(QSize(100, 100))
                 # set the icons randomly on the game boar
                 if self.object_name%2 == 0:
-                    self.button.setIcon(self.xIcon)
-                else:
                     self.button.setIcon(self.oIcon)
+                else:
+                    self.button.setIcon(self.xIcon)
                 self.board_game.addWidget(self.button, self.row, self.column, 1, 1)
                 self.object_name += 1  # increment each object name
             self.row += 1
@@ -148,11 +146,9 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         self.new_game = QPushButton("new game")
         self.new_game.setFixedSize(90,20)
         self.new_game.setFont(QFont("Monospace",13,5))
-        self.new_game.clicked.connect(self.newGame)
         self.exit = QPushButton("exit")
         self.exit.setFixedSize(90,20)
         self.exit.setFont(QFont("Monospace",13,5))
-        self.exit.clicked.connect(self.exit_button)
 
         self.grid_buttons = QGridLayout()
         self.grid_buttons.addWidget(self.new_game,0,3)
@@ -187,26 +183,6 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
         # Style the widgets on the main window
         css = qstylizer.style.StyleSheet()
 
-        # Style the Button games
-        css.QToolButton.setValues(
-            border="2px solid grey",
-            marginLeft = "2px",
-            marginRight = "2px",
-            marginBottom = "2px",
-            borderRadius="7px",
-        )
-
-        # style the Push Button
-        css.QPushButton.pressed.setValues(
-            border="2px solid black"
-        )
-
-        # Style the Button games
-        css.QToolButton.pressed.setValues(
-            border="3px solid black",
-            padding="5px",
-        )
-
         # style the Text Edit
         css.QTextEdit.setValues(
             borderRadius="7px",
@@ -233,13 +209,62 @@ class OXO_GUI(QWidget):  # Stock inherits from the Qwidget
             paddingRight="2px"
         )
 
+        # style the Line Edit
         css.QLineEdit.setValues(
             border="2px solid gray",
             paddingLeft="2px",
             paddingRight="2px"
         )
 
-        self.main_layout_widget.setStyleSheet(css.toString()) # set the style
+        # Style the tool button
+        css.QToolButton.setValues(
+            border="2px solid grey",
+            marginLeft = "2px",
+            marginRight = "2px",
+            marginBottom = "2px",
+            borderRadius="7px",
+        )
+
+        # change the push button style when pressed
+        css.QPushButton.pressed.setValues(
+            border="3px solid black",
+            padding="5px",
+            paddingLeft="-1px",
+            marginRight="-1px",
+            marginBottom="0px"
+        )
+
+        # change the tool button style when pressed
+        css.QToolButton.pressed.setValues(
+            border="3px solid black",
+            padding="1px",
+            marginLeft="5px",
+            marginRight="5px",
+            marginTop="5px",
+            marginBottom="5px"
+        )
+
+        # change the tool button style when hovered
+        css.QToolButton.hover.setValues(
+            border="3px solid black"
+        )
+
+        # change the push button style when hovered
+        css.QPushButton.hover.setValues(
+            border="2px solid black"
+        )
+
+        # change the server line edit when its hovered
+        css.QLineEdit.hover.setValues(
+            border="2px solid black"
+        )
+
+        self.main_layout_widget.setStyleSheet(css.toString()) # set the stulesheet
+
+        # connect buttons
+        self.connect_btn.clicked.connect(self.connect_button)
+        self.exit.clicked.connect(self.exit_button)
+        self.new_game.clicked.connect(self.newGame)
 
         # musk all buttons into one function
         self.allButtons = self.board_game_widget.findChildren(QToolButton)
@@ -266,4 +291,4 @@ def run_app():
     sys.exit(app.exec_())  # start executing main app event loop and return value to the exit system
 
 if __name__ == "__main__":
-    run_app()
+    run_app()  # run the main app
